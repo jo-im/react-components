@@ -5,17 +5,27 @@ class GroceryListItems extends React.Component {
   constructor(props) {
 
     super(props);
+  
+    this.state = {
+      done: false
+    };
+  }
+
+  onMouseHover() {
+    this.setState({
+      done: !this.state.done 
+    });
   }
 
   render() {
+    var style = {
+      fontWeight: this.state.done ? 'bold' : 'normal'
+    };
 
     return (
-
-      <li> {this.props.item} </li>
-
-      );
-  }
-
+      <li style={style} onMouseEnter={this.onMouseHover.bind(this)}>{this.props.item}</li>
+    );
+  };
 }
 
 var GroceryList = (props) => (
@@ -29,6 +39,5 @@ var GroceryList = (props) => (
   
  
 );
-
 
 ReactDOM.render(<GroceryList items={groceryItems}/>, document.getElementById('app'));
